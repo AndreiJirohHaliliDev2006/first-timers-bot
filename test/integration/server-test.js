@@ -6,6 +6,9 @@ const { test } = require("tap");
 const octokit = new Octokit();
 const server = require("../../server");
 const robotMock = {
+  log: {
+    debug: () => {},
+  },
   on: () => {},
 };
 
@@ -25,6 +28,9 @@ test("server create event with reftype = tag", async (t) => {
   };
 
   await handleCreateEvent({
+    log: {
+      debug() {},
+    },
     payload: {
       ref_type: "tag",
       repository: {
@@ -54,6 +60,9 @@ test("server create event with branch ref read-me-fix", async (t) => {
   };
 
   await handleCreateEvent({
+    log: {
+      debug() {},
+    },
     payload: {
       ref_type: "branch",
       ref: "read-me-fix",
@@ -70,8 +79,9 @@ test("server create event with branch ref read-me-fix", async (t) => {
 });
 
 test("server create event with non-existing branch name", async (t) => {
-  t.plan(3);
+  t.plan(5);
   simple.mock(robotMock, "on");
+  simple.mock(console, "error").callFn(() => {});
 
   server(robotMock);
 
@@ -95,7 +105,10 @@ test("server create event with non-existing branch name", async (t) => {
   };
 
   await handleCreateEvent({
-    github: octokit,
+    log: {
+      debug() {},
+    },
+    octokit,
     payload: {
       ref_type: "branch",
       ref: "first-timers-does-not-exist",
@@ -108,9 +121,12 @@ test("server create event with non-existing branch name", async (t) => {
       },
     },
     config: configure,
+  }).catch((error) => {
+    t.is(error.message, "Branch not found");
   });
 
   t.is(githubMock.pendingMocks()[0], undefined);
+  t.is(console.error.callCount, 1);
 
   simple.restore();
   t.end();

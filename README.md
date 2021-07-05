@@ -57,13 +57,24 @@ The first-timers app works without configuration. If you want to change the defa
 labels:
   - first-timers-only
 
-#If you would like to add your own template for the issue, add an .md file to your .github folder
+# If you would like to add your own template for the issue, add an .md file to your .github folder
 template: .github/first-timers-issue-template.md
+# In order to load the template from another repository, prefix the path with "<repo>:", e.g.
+# template: other-repo:.github/first-timers-issue-template.md
 
 # You can create the issue in a different repo than where the problem is. Just make sure you installed the bot on the configured repository.
 # The issue will link back to the original repository where the contribution will be made.
 repository: repo-name
 ```
+
+The following placeholders are supported in the template and will be replaced upon creation:
+
+- `$DIFF`: The diff string
+- `$FILENAME`: The file name
+- `$BRANCH_URL`: URL to the file on github.com
+- `$REPO`: name of the repository
+- `$AUTHOR`: author of the user who created the commit
+- `$COMMIT_BODY`: The body of the commit
 
 **Configuration Example** 🖥 💯
 
@@ -71,7 +82,7 @@ Our `hoodiehq/first-timers-bot` repository’s [`.github/first-timers.yml`](http
 
 ### Server Status
 
-Make sure to verify that the **status** badge at the top of this file is labeled as `up`. First Timers Bot is a node app that currently runs on [Now](https://zeit.co/now).
+Make sure to verify that the **status** badge at the top of this file is labeled as `up`. You can check the current status at https://stats.uptimerobot.com/LZ40Lcoj4
 
 ### 👩‍💻💕About Us
 
@@ -83,7 +94,6 @@ Contributors END -->
 
 | <img src="https://avatars.githubusercontent.com/agonzalez0515?s=100" width="100" alt="Angie Gonzalez" /><br />[<sub>Angie Gonzalez</sub>](https://agonzalez0515.github.io)<br /> | <img src="https://avatars.githubusercontent.com/techforchange?s=100" width="100" alt="Arlene Perez" /><br />[<sub>Arlene Perez</sub>](https://github.com/techforchange)<br /> |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-
 
 <!-- Contributors table END -->
 
@@ -101,7 +111,6 @@ Thank you to everyone who has helped with this project.
 
 | <img src="https://avatars.githubusercontent.com/michaelmccombie?s=100" width="100" alt="Michael McCombie" /><br />[<sub>Michael McCombie</sub>](https://twitter.com/michaelbuilds)<br />[🎨](https://raw.githubusercontent.com/hoodiehq/first-timers-bot/51742c62ae3e4e2be7e58d170a9eab73a3871bf4/assets/avatar.png) | <img src="https://avatars.githubusercontent.com/gr2m?s=100" width="100" alt="Gregor Martynus" /><br />[<sub>Gregor Martynus</sub>](https://twitter.com/gr2m)<br />👨🏻‍🏫 |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-
 
 <!-- Contributors table END -->
 
